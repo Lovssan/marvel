@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/%20//Lovssan.github.io/marvel/static/css/main.b5d18ca7.css",
-    "main.js": "/%20//Lovssan.github.io/marvel/static/js/main.f6ed00d2.js",
+    "main.js": "/%20//Lovssan.github.io/marvel/static/js/main.ac48c6bf.js",
     "static/media/vision.png": "/%20//Lovssan.github.io/marvel/static/media/vision.067d4ae1936d64a577ce.png",
     "static/media/mjolnir.png": "/%20//Lovssan.github.io/marvel/static/media/mjolnir.61f31e1809f12183a524.png",
     "static/media/Avengers.png": "/%20//Lovssan.github.io/marvel/static/media/Avengers.4065c8f9c94e3d8b039a.png",
@@ -9,10 +9,10 @@
     "static/media/Avengers_logo.png": "/%20//Lovssan.github.io/marvel/static/media/Avengers_logo.9eaf219344d83362e830.png",
     "index.html": "/%20//Lovssan.github.io/marvel/index.html",
     "main.b5d18ca7.css.map": "/%20//Lovssan.github.io/marvel/static/css/main.b5d18ca7.css.map",
-    "main.f6ed00d2.js.map": "/%20//Lovssan.github.io/marvel/static/js/main.f6ed00d2.js.map"
+    "main.ac48c6bf.js.map": "/%20//Lovssan.github.io/marvel/static/js/main.ac48c6bf.js.map"
   },
   "entrypoints": [
     "static/css/main.b5d18ca7.css",
-    "static/js/main.f6ed00d2.js"
+    "static/js/main.ac48c6bf.js"
   ]
 }
