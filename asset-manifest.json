@@ -1,16 +1,18 @@
 {
   "files": {
-    "main.css": "/marvel/static/css/main.71f1e644.css",
-    "main.js": "/marvel/static/js/main.98c141fe.js",
-    "static/media/vision.png": "/marvel/static/media/vision.067d4ae1936d64a577ce.png",
-    "static/media/mjolnir.png": "/marvel/static/media/mjolnir.61f31e1809f12183a524.png",
-    "static/media/error.gif": "/marvel/static/media/error.42292aa12b6bc303ce99.gif",
-    "index.html": "/marvel/index.html",
-    "main.71f1e644.css.map": "/marvel/static/css/main.71f1e644.css.map",
-    "main.98c141fe.js.map": "/marvel/static/js/main.98c141fe.js.map"
+    "main.css": "/%20//Lovssan.github.io/marvel/static/css/main.b5d18ca7.css",
+    "main.js": "/%20//Lovssan.github.io/marvel/static/js/main.f6ed00d2.js",
+    "static/media/vision.png": "/%20//Lovssan.github.io/marvel/static/media/vision.067d4ae1936d64a577ce.png",
+    "static/media/mjolnir.png": "/%20//Lovssan.github.io/marvel/static/media/mjolnir.61f31e1809f12183a524.png",
+    "static/media/Avengers.png": "/%20//Lovssan.github.io/marvel/static/media/Avengers.4065c8f9c94e3d8b039a.png",
+    "static/media/error.gif": "/%20//Lovssan.github.io/marvel/static/media/error.42292aa12b6bc303ce99.gif",
+    "static/media/Avengers_logo.png": "/%20//Lovssan.github.io/marvel/static/media/Avengers_logo.9eaf219344d83362e830.png",
+    "index.html": "/%20//Lovssan.github.io/marvel/index.html",
+    "main.b5d18ca7.css.map": "/%20//Lovssan.github.io/marvel/static/css/main.b5d18ca7.css.map",
+    "main.f6ed00d2.js.map": "/%20//Lovssan.github.io/marvel/static/js/main.f6ed00d2.js.map"
   },
   "entrypoints": [
-    "static/css/main.71f1e644.css",
-    "static/js/main.98c141fe.js"
+    "static/css/main.b5d18ca7.css",
+    "static/js/main.f6ed00d2.js"
   ]
 }
