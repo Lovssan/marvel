@@ -1,45 +1,32 @@
 import './randomChar.scss';
 import mjolnir from '../../resources/img/mjolnir.png';
 import { useEffect, useState } from 'react';
-import MarvelServices from '../../services/MarvelServices';
-import Spinner from '../../spinner/004 Spinner';
-import ErrorMessage from '../errorMessage/ErrorMessage';
+import useMarvelServices from '../../services/MarvelServices';
+import setContent from '../../utils/setContent';
+
+
 
 const RandomChar = () => {
-    const [state, setState] = useState({})
-    const [load, setLoad] = useState(true)
-    const [error, setError] = useState(false)
+    const [char, setChar] = useState({})
+    const {getComicOrChar, clearError, process, setProcess} = useMarvelServices()
     useEffect(()=>{
         updateChar()
+        // eslint-disable-next-line
     },[])
-    const marvelServices = new MarvelServices()
     const onLoaded = (res)=>{
-        console.log(res);
-        setState(res)
-        setLoad(false)
-        setError(false)
+        setChar(res)
     }
-    const onError = ()=>{
-        setError(true)
-        setLoad(false)
-    }
-    function updateChar(){
-        setLoad(true)
+    const updateChar = ()=>{
+        clearError()
         const id = Math.floor(Math.random()*(1011400-1011000)+1011000)
-        marvelServices
-            .getCharacter(id)
+        getComicOrChar(id)
             .then(onLoaded)
-            .catch(onError)
+            .then(()=>setProcess('confirmed'))
     }
-    const errorMessage = error?<ErrorMessage />: null
-    const spinner = load?<Spinner />: null
-    const content = !(load||error)?<View state={state}/>: null
 
     return (
         <div className="randomchar">
-            {errorMessage}
-            {spinner}
-            {content}
+            {setContent(process, View, char)}
             <div className="randomchar__static">
                 <p className="randomchar__title">
                     Random character for today!<br/>
@@ -57,8 +44,8 @@ const RandomChar = () => {
     )
 }
 
-const View = ({state})=>{
-    const {name, description, thumbnail, homepage, wiki} = state
+const View = ({data})=>{
+    const {name, description, thumbnail, homepage, wiki} = data
     const notImage = 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg'===thumbnail?{objectFit: 'contain'}:null
     return(
         <div className="randomchar__block">

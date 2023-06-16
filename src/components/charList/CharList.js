@@ -1,47 +1,74 @@
 import React, { useEffect, useState } from 'react';
-import MarvelServices from '../../services/MarvelServices';
+import useMarvelServices from '../../services/MarvelServices';
+import Spinner from '../spinner/004 Spinner';
+import ErrorMessage from '../errorMessage/ErrorMessage';
 import './charList.scss';
 
+const setContent = (process) =>{
+    switch (process) {
+        case 'waiting':
+            return <Spinner />
+        case 'loading':
+            return <Spinner />
+        case 'confirmed':
+            return
+        case 'error':
+            return <ErrorMessage />
+        default:
+            throw new Error('Unexpected process state')
+    }
+}
+
 const CharList = ({onCharSelected}) => {
-    const [state, setState] = useState([])
+    const [charList, setCharList] = useState([])
+    const [newItemLoad, setNewItemLoad] = useState(false)
     const [offset, setOffset] = useState(150)
-    const [loading, setLoading] = useState([false, 'load more'])
     const [charEnded, setCharEnded] = useState(false)
     const [itemSelect, setItemSelect] = useState(null)
+    const {getAllCharacters, process, setProcess} = useMarvelServices()
+
+    useEffect(()=>{
+        onRequest(offset, false)
+        // eslint-disable-next-line
+    },[])
 
     const selectOnItem = (id) => {
         setItemSelect(id);
     }
-
-    const marvelServices = new MarvelServices()
-    const onRequest = (offset)=>{
-        setLoading([true, 'loading...'])
-        setOffset(prev=>{
-            console.log(prev)
-            return prev+9})
-        marvelServices.getAllCharacters(offset).then(res=>setState(prev=>{
-            setLoading([false, 'load more'])
-            if(res.length<9){
-                setCharEnded(true)
-            }
-            return [...prev,...res]}))
+    
+    const onRequest = (offset, initial=true)=>{
+        setNewItemLoad(initial)
+        getAllCharacters(offset)
+            .then(onCharListloaded)
+            .then(()=>setProcess('confirmed'))
     }
-    useEffect(()=>{
-        console.log('useEffect');
-        onRequest()
-    },// eslint-disable-next-line
-    [])
-    return (
-        <div className="char__list" >
+
+    const onCharListloaded =async(res)=>{
+        if(res.length<9){
+            setCharEnded(true)
+        }
+        setCharList([...charList,...res])
+        setNewItemLoad(false)
+        setOffset(prev=>prev+9)
+    }
+    const items = ()=>{
+        return(
             <ul className="char__grid">
-                {state.map(item=>
+                {charList.map(item=>
                     <CardChar key={item.id} itemSelect={itemSelect} item={item} 
                     onCharSelected={onCharSelected} selectOnItem={selectOnItem}/>)}
             </ul>
-            {!charEnded&&<button onClick={()=>onRequest(offset)} 
+        )
+    }
+    return (
+        <div className="char__list" >
+            {setContent(process)}
+            {items()}
+            {!charEnded&&
+            <button onClick={()=>onRequest(offset)} 
             className="button button__main button__long"
-            disabled={loading[0]}>
-                <div className="inner" >{loading[1]}</div>
+            disabled={newItemLoad}>
+                <div className="inner" >{newItemLoad?'loading...':'load more'}</div>
             </button>}
         </div>
     )
@@ -55,7 +82,13 @@ const CardChar =({item, onCharSelected, itemSelect,selectOnItem})=>{
         tabIndex={0}
         onClick={()=>{
             onCharSelected(item.id)
-            selectOnItem(item.id)}}>
+            selectOnItem(item.id)
+            }}
+        onKeyPress={(e) => {
+            if (e.key === ' ' || e.key === "Enter") {
+                onCharSelected(item.id);
+                selectOnItem(item.id);
+            }}}>
             <img src={item.thumbnail} alt="abyss" style={notImageStyle}/>
             <div className="char__name">{item.name}</div>
         </li>
